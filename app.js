@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const fixersLocationRoutes = require('./routes/fixersLocation');
 const requestRoutes = require('./routes/requests');
+const notificationRoutes = require('./routes/notifications');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 app.use('/auth', authRoutes);
 app.use('/fixersLocation', fixersLocationRoutes);
 app.use('/requests', requestRoutes);
+app.use('/notification', notificationRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
