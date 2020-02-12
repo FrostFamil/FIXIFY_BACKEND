@@ -11,6 +11,8 @@ const router = express.Router();
 
 router.post('/saveFixersToken', notificationController.addFixersPushToken);
 router.post('/getFixersToken', notificationController.getFixersPushToken);
+router.post('/saveUsersToken', notificationController.addUsersPushToken);
+router.post('/getUsersToken', notificationController.getUsersPushToken);
 
 
 module.exports = router;
