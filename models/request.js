@@ -32,11 +32,19 @@ const request = new Schema({
     type: String,
     required: true
   },
+  paymentType: {
+    type: String,
+    required: true
+  },
   problem: {
     type: String,
     required: true
   },
   serviceType: {
+    type: String,
+    required: true
+  },
+  scheduled: {
     type: String,
     required: true
   }

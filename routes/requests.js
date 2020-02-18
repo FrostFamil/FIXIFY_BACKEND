@@ -20,6 +20,6 @@ router.post('/acceptRequest', requestController.fixerAcceptRequest);
 router.post('/seeRequest', requestController.fixerSeeRequest);
 router.post('/userFindHisRequest', requestController.userFindHisCurrentRequest);
 router.post('/userSeeFixer', requestController.userSeeFixerOnMap);
-//router.post('/cancelCurrentrequest', requestController.userCancelCurrentRequest);
+router.post('/deleteCurrentrequest', requestController.userDeleteCurrentRequest);
 
 module.exports = router;

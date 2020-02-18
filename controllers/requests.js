@@ -13,8 +13,10 @@ exports.addUsersRequest = (req, res, next) => {
     const creator = req.body.creator;
     const acceptor = req.body.acceptor;
     const price = req.body.price;
+    const paymentType = req.body.paymentType;
     const problem = req.body.problem;
     const serviceType = req.body.serviceType;
+    const scheduled = req.body.scheduled;
 
     const request = new Request({
         latitudeFrom: latitudeFrom,
@@ -22,8 +24,10 @@ exports.addUsersRequest = (req, res, next) => {
         creator: creator,
         acceptor: acceptor,
         price: price,
+        paymentType: paymentType,
         problem: problem,
-        serviceType: serviceType
+        serviceType: serviceType,
+        scheduled: scheduled
     });
     request
       .save()
@@ -261,8 +265,8 @@ exports.userSeeFixerOnMap = (req, res, next) => {
     });
 }
 
-/*
-exports.userCancelCurrentRequest = (req, res, next) => {
+
+exports.userDeleteCurrentRequest = (req, res, next) => {
   const requestId = req.body.requestId;
 
   Request.findByIdAndRemove(requestId)
@@ -275,4 +279,4 @@ exports.userCancelCurrentRequest = (req, res, next) => {
       }
       next(err);
     });
-};*/
+};
