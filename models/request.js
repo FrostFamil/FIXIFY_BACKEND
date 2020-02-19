@@ -47,6 +47,10 @@ const request = new Schema({
   scheduled: {
     type: String,
     required: true
+  },
+  address: {
+    type: String,
+    required: true
   }
   },
   { timestamps: true }

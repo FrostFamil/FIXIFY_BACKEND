@@ -17,6 +17,7 @@ exports.addUsersRequest = (req, res, next) => {
     const problem = req.body.problem;
     const serviceType = req.body.serviceType;
     const scheduled = req.body.scheduled;
+    const address = req.body.address;
 
     const request = new Request({
         latitudeFrom: latitudeFrom,
@@ -27,7 +28,8 @@ exports.addUsersRequest = (req, res, next) => {
         paymentType: paymentType,
         problem: problem,
         serviceType: serviceType,
-        scheduled: scheduled
+        scheduled: scheduled,
+        address: address
     });
     request
       .save()
@@ -165,6 +167,7 @@ exports.fixerFinishRequest = (req, res, next) => {
         console.log(result);
         
         result.status = "Finished";
+        result.available = "No"
         return result.save();
     })
     .then(result => {
@@ -227,14 +230,9 @@ exports.userFindHisCurrentRequest = (req, res, next) => {
 
   Request.find({creator: creator, available: "Yes"})
     .then(result => {
-
-      result[0].available = "No";
-      return result[0].save();
-    })
-    .then(result => {
       res.status(201).json({
         message: 'Request getted Successfully',
-        requests: result
+        requests: result[0]
       });
     })
     .catch(err => {
