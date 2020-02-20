@@ -7,12 +7,14 @@ exports.addFixersPushToken = (req, res, next) => {
     const token = req.body.token;
     const fName = req.body.fName;
     const lName = req.body.lName;
+    const fixerId = req.body.fixerId;
     const serviceType = req.body.serviceType;
 
     const fixerTokenSave = new fixerPushNotification({
       token: token,
       firstName: fName,
       lastName: lName,
+      fixerId: fixerId,
       serviceType: serviceType
     });
     fixerTokenSave

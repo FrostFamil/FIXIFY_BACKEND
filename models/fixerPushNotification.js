@@ -14,6 +14,10 @@ const fixerPushNotificationSchema = new Schema({
     type: String,
     required: true
   },
+  fixerId: {
+    type: String,
+    required: true
+  },
   serviceType: {
     type: String,
     required: true

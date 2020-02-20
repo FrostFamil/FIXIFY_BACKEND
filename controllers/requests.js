@@ -48,11 +48,32 @@ exports.addUsersRequest = (req, res, next) => {
 };
 
 
-exports.getAllPendingRequests = (req, res, next) => {
+exports.getAllNotAcceptedRequests = (req, res, next) => {
 
     const creator = req.body.creator;
 
     Request.find({creator: creator, status: "Not Accepted"}).then(result => {
+      return result;
+    })
+    .then(requests => {
+        res.status(200).json({
+          message: 'Fetched all Not Accepted requests successfully.',
+          requests: requests
+        });
+      })
+      .catch(err => {
+        if (!err.statusCode) {
+          err.statusCode = 500;
+        }
+        next(err);
+      });
+  };
+
+  exports.getAllPendingRequests = (req, res, next) => {
+
+    const creator = req.body.creator;
+
+    Request.find({creator: creator, status: "Pending"}).then(result => {
       return result;
     })
     .then(requests => {
@@ -136,7 +157,7 @@ exports.getAllPendingRequests = (req, res, next) => {
 
   exports.fixerAcceptRequest = (req, res, next) => {
     
-    const requestIndex = req.body.requestIndex;
+    const requestIndex = req.body.requestIndex; 
     const fixerId = req.body.fixerId;
 
     Request.findById(requestIndex)
@@ -156,6 +177,34 @@ exports.getAllPendingRequests = (req, res, next) => {
         }
         next(err);
       });
+};
+
+exports.fixerSetPriceForRequest = (req, res, next) => {
+    
+  const requestIndex = req.body.requestIndex;
+  const price = req.body.price;
+  const fixerId = req.body.fixerId;
+
+  Request.findById(requestIndex)
+    .then(result => {
+        console.log(result);
+        
+        result.priceStatus = "Decided";
+        result.status = "Pending";
+        result.price = price;
+        result.acceptor = fixerId;
+
+        return result.save();
+    })
+    .then(result => {
+      res.status(200).json({ message: 'Price for Request Setted', request: result });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 };
 
 exports.fixerFinishRequest = (req, res, next) => {
@@ -202,6 +251,27 @@ exports.fixerGetFinishedRequests = (req, res, next) => {
     });
 };
 
+exports.fixerGetPendingRequests = (req, res, next) => {
+
+  const acceptor = req.body.acceptor;
+
+  Request.find({acceptor: acceptor, status: "Pending"}).then(result => {
+    return result;
+  })
+  .then(requests => {
+      res.status(200).json({
+        message: 'Fetched all pending requests successfully.',
+        requests: requests
+      });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
 exports.fixerSeeRequest = (req, res, next) => {
     
     const requestIndex = req.body.requestIndex;
@@ -233,6 +303,59 @@ exports.userFindHisCurrentRequest = (req, res, next) => {
       res.status(201).json({
         message: 'Request getted Successfully',
         requests: result[0]
+      });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+
+exports.userAcceptPriceForCurrentRequest = (req, res, next) => {
+    
+  const requestId = req.body.requestId;
+
+  Request.findById(requestId)
+    .then(result => {
+        console.log(result);
+        
+        result.priceStatus = "Done";
+        return result.save();
+    })
+    .then(result => {
+      res.status(201).json({
+        message: 'Request getted Successfully',
+        requests: result
+      });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+exports.userDeclinePriceForCurrentRequest = (req, res, next) => {
+    
+  const requestId = req.body.requestId;
+
+  Request.findById(requestId)
+    .then(result => {
+        console.log(result);
+        
+        result.priceStatus = "Not Decided";
+        result.status = "Not Accepted";
+        result.price = "0";
+        return result.save();
+    })
+    .then(result => {
+      res.status(201).json({
+        message: 'Request declined Successfully',
+        requests: result
       });
     })
     .catch(err => {

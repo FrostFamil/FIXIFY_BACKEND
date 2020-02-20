@@ -28,6 +28,10 @@ const request = new Schema({
     type: String,
     default: "Yes"
   },
+  priceStatus: {
+    type: String,
+    default: "Not Decided"
+  },
   price: {
     type: String,
     required: true
