@@ -8,6 +8,7 @@ const authRoutes = require('./routes/auth');
 const fixersLocationRoutes = require('./routes/fixersLocation');
 const requestRoutes = require('./routes/requests');
 const notificationRoutes = require('./routes/notifications');
+const payment = require('./routes/payment');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use('/auth', authRoutes);
 app.use('/fixersLocation', fixersLocationRoutes);
 app.use('/requests', requestRoutes);
 app.use('/notification', notificationRoutes);
+app.use('/payment', payment);
 
 app.use((error, req, res, next) => {
   console.log(error);

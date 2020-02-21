@@ -16,7 +16,7 @@ router.post('/getAcceptedRequest', requestController.getAllAcceptedRequests);
 router.post('/getFinishedRequest', requestController.getAllFinishedRequests);
 router.post('/fixerGetAllRelatedRequest', requestController.fixerGetRelatedRequests);
 router.post('/fixerGetPendingRequest', requestController.fixerGetPendingRequests);
-router.post('/fixerFinishRequest', requestController.fixerFinishRequest);
+router.post('/userFinishRequest', requestController.userFinishRequest);
 router.post('/getAllHistoriesOfFixer', requestController.fixerGetFinishedRequests)
 router.post('/acceptRequest', requestController.fixerAcceptRequest);
 router.post('/seeRequest', requestController.fixerSeeRequest);

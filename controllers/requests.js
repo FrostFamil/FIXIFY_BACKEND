@@ -207,7 +207,7 @@ exports.fixerSetPriceForRequest = (req, res, next) => {
     });
 };
 
-exports.fixerFinishRequest = (req, res, next) => {
+exports.userFinishRequest = (req, res, next) => {
     
   const requestIndex = req.body.requestIndex;
 
@@ -216,7 +216,8 @@ exports.fixerFinishRequest = (req, res, next) => {
         console.log(result);
         
         result.status = "Finished";
-        result.available = "No"
+        result.available = "No";
+        result.priceStatus = "Paid";
         return result.save();
     })
     .then(result => {

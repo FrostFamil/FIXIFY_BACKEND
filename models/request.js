@@ -33,7 +33,7 @@ const request = new Schema({
     default: "Not Decided"
   },
   price: {
-    type: String,
+    type: Number,
     required: true
   },
   paymentType: {
