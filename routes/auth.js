@@ -85,8 +85,6 @@ router.post('/profile', profileController.getUserProfile);
 router.post('/fixerProfile', profileController.getFixerProfile);
 
 router.post('/addCard', profileController.addUserCard);
-router.post('/addFixerCard', profileController.addFixerCard);
 router.post('/getCards', profileController.getCards);
-router.post('/getFixerCards', profileController.getFixerCards)
 
 module.exports = router;
