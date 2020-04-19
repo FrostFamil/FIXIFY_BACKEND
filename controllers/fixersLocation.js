@@ -87,21 +87,21 @@ exports.getFixerPreviousLoc = (req, res, next) => {
     });
 }
 
-exports.getFixersLoc = (req, res, next) => {
+// exports.getFixersLoc = (req, res, next) => {
 
-  FixerLatLng.find().then(result => {
-    return result;
-  })
-  .then(fixers => {
-      res.status(200).json({
-        message: 'Fetched all fixers successfully.',
-        fixers: fixers
-      });
-    })
-    .catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
-};
+//   FixerLatLng.find().then(result => {
+//     return result;
+//   })
+//   .then(fixers => {
+//       res.status(200).json({
+//         message: 'Fetched all fixers successfully.',
+//         fixers: fixers
+//       });
+//     })
+//     .catch(err => {
+//       if (!err.statusCode) {
+//         err.statusCode = 500;
+//       }
+//       next(err);
+//     });
+// };

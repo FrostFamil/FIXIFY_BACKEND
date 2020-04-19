@@ -47,3 +47,5 @@ mongoose
     app.listen(8080, "192.168.0.87");
   })
   .catch(err => console.log(err));
+
+  module.exports = app;

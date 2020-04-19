@@ -10,6 +10,6 @@ const router = express.Router();
 router.put('/addFixersLoc', fixersLocationController.addFixersLoc);
 router.put('/updateFixersLoc', fixersLocationController.updateFixersLoc);
 router.post('/getFixersPreviousLoc', fixersLocationController.getFixerPreviousLoc);
-router.post('/getFixersLoc', fixersLocationController.getFixersLoc);
+// router.post('/getFixersLoc', fixersLocationController.getFixersLoc);
 
 module.exports = router;

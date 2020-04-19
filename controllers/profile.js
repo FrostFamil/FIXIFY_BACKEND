@@ -100,3 +100,67 @@ exports.getCards = (req, res, next) => {
       next(err);
     });
 };
+
+exports.updateUserProfile = (req, res, next) => {
+
+  const userId = req.body.userId;
+  const fName = req.body.fName;
+  const lName = req.body.lName;
+  const phone = req.body.phone;
+  const email = req.body.email;
+
+  User.findById(userId)
+    .then(result => {
+        console.log(result);
+        
+        result.firstName = fName;
+        result.lastName = lName;
+        result.email = email;
+        result.phone = phone;
+        return result.save();
+    })
+    .then(result => {
+      res.status(201).json({
+        message: 'User profile updated successfully',
+        requests: result
+      });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+exports.updateFixerProfile = (req, res, next) => {
+
+  const fixerId = req.body.fixerId;
+  const fName = req.body.fName;
+  const lName = req.body.lName;
+  const phone = req.body.phone;
+  const email = req.body.email;
+
+  Fixer.findById(fixerId)
+    .then(result => {
+        console.log(result);
+        
+        result.firstName = fName;
+        result.lastName = lName;
+        result.email = email;
+        result.phone = phone;
+        return result.save();
+    })
+    .then(result => {
+      res.status(201).json({
+        message: 'Fixer profile updated successfully',
+        requests: result
+      });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
